@@ -1,5 +1,5 @@
 `timescale 1ns/1ns
-
+`include "top.v"
 module tb_top;
 
   reg clk, reset, read_en, write_en;

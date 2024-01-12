@@ -1,10 +1,14 @@
+`include "fifo_output_control_unit.v"
+`include "fifo_input_control.v"
+`include "fifo.v"
 module top (
     input clk,reset,read_en,write_en,
     input [7:0]data_in,
     output [7:0]data_out
 );
-reg [4:0]ptr_of,ptr_uf;
-reg overflow,underflow;
+wire [4:0] ptr_of;
+wire [4:0] ptr_uf;
+wire overflow,underflow;
 // fifo input cotrol takes data from processor 1
 fifo_input_control inst1 (
     .write_en(en_write), .reset(reset), .clk(clk),
@@ -20,8 +24,8 @@ fifo_output_control inst2 (
 // main inititalizaton
 fifo inst3 (
     .data_in(data_in),
-    .ptr_in(ptr_in),
-    .ptr_out(ptr_out),
+    .ptr_in(ptr_of),
+    .ptr_out(ptr_uf),
     .en_read(en_read),
     .en_write(en_write),
     .reset(reset),
