@@ -1,14 +1,15 @@
+//TODO: add overflow and underflow to the output list
 `include "fifo_output_control_unit.v"
 `include "fifo_input_control.v"
 `include "fifo.v"
 module top (
     input clk,reset,read_en,write_en,
     input [7:0]data_in,
-    output [7:0]data_out
+    output [7:0]data_out,
+    output overflow,underflow
 );
 wire [4:0] ptr_of;
 wire [4:0] ptr_uf;
-wire overflow,underflow;
 // fifo input cotrol takes data from processor 1
 fifo_input_control inst1 (
     .write_en(en_write), .reset(reset), .clk(clk),

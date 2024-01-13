@@ -1,5 +1,7 @@
+// TODO: add  data_out  in the top module  
 module fifo_output_control (
     input  read_en, reset, clk,
+    input [7:0]data_out,
     output reg read_en_o, underflow,
     output reg [4:0] ptr
 );
@@ -13,11 +15,11 @@ module fifo_output_control (
             underflow <= 1'b0;
         end
         else begin
-            if (read_en) begin
-                if (count != 5'b0) begin
+            if (read_en ) begin
+                if  (data_out != 8'd0) begin
                     underflow <= 1'b0;
-                    count <= count - 1;
-                    ptr <= count - 1;
+                    count <= count + 1;
+                    ptr <= count;
                     read_en_o <= 1'b1;
                 end
                 else begin
