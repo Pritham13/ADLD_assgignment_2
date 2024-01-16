@@ -5,7 +5,7 @@ module tb_top;
   reg clk, reset, read_en, write_en;
   reg [7:0] data_in;
   wire [7:0] data_out;
-
+  wire overflow,underflow;
   // Clock generation
   always begin
     #5 clk = ~clk;
@@ -18,7 +18,9 @@ module tb_top;
     .read_en(read_en),
     .write_en(write_en),
     .data_in(data_in),
-    .data_out(data_out)
+    .data_out(data_out),
+    .overflow(overflow),
+    .underflow(underflow)
   );
 initial
 begin
