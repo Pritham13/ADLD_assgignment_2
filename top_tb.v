@@ -30,7 +30,7 @@ begin
 end
   // Initialize signals
   initial begin
-    clk = 0;
+    clk = 1;
     reset = 1;
     read_en = 0;
     write_en = 0;
