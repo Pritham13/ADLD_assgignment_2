@@ -27,8 +27,8 @@ fifo fifo_inst (
     .data_in(data_in),
     .ptr_in(ptr_of),
     .ptr_out(ptr_uf),
-    .en_read(en_read),
-    .en_write(en_write),
+    .en_read(read_en_o),
+    .en_write(write_en_o),
     .reset(reset),
     .clk(clk),
     .data_out(data_out)
