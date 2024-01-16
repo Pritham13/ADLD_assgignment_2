@@ -11,19 +11,19 @@ module top (
 wire [4:0] ptr_of;
 wire [4:0] ptr_uf;
 // fifo input cotrol takes data from processor 1
-fifo_input_control inst1 (
-    .write_en(en_write), .reset(reset), .clk(clk),
+fifo_input_control fifo_input_control1 (
+    .write_en(write_en), .reset(reset), .clk(clk),
     .write_en_o(write_en_o), .overflow(overflow),
     .ptr(ptr_of)
 );
 // fifo output control gets data from the fifo to processor 2
-fifo_output_control inst2 (
-    .read_en(en_read), .reset(reset), .clk(clk),
+fifo_output_control fifo_output_control2 (
+    .read_en(read_en), .reset(reset), .clk(clk),
     .read_en_o(read_en_o), .underflow(underflow),
     .ptr(ptr_uf)
 );
 // main inititalizaton
-fifo inst3 (
+fifo fifo_inst (
     .data_in(data_in),
     .ptr_in(ptr_of),
     .ptr_out(ptr_uf),
