@@ -10,7 +10,6 @@ module top (
 );
 wire [4:0] ptr_of;
 wire [4:0] ptr_uf;
-wire [7:0]data_out_1;
 // fifo input cotrol takes data from processor 1
 fifo_input_control fifo_input_control1 (
     .write_en(write_en), .reset(reset), .clk(clk),
@@ -22,8 +21,6 @@ fifo_output_control fifo_output_control2 (
     .read_en(read_en), .reset(reset), .clk(clk),
     .read_en_o(read_en_o), .underflow(underflow),
     .ptr(ptr_uf),
-    .data_out(data_out_1),
-    .data_out_f(data_out)
 );
 // main inititalizaton
 fifo fifo_inst (
@@ -34,7 +31,7 @@ fifo fifo_inst (
     .en_write(write_en_o),
     .reset(reset),
     .clk(clk),
-    .data_out(data_out_1)
+    .data_out(data_out)
 );
 
 

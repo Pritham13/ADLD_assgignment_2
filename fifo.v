@@ -23,11 +23,11 @@ begin
         // 2'b01: register[ptr_in]<=data_in;
         // 2'b10: data_out <= register[ptr_out];
         // endcase 
-        if  (en_read)
+        if  (en_write)
         begin
            register[ptr_in]<=data_in;
         end
-        if  (en_write)
+        if  (en_read)
         begin
             data_out <= register[ptr_out];
         end 

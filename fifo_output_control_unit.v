@@ -4,8 +4,7 @@ module fifo_output_control (
     input [7:0]data_out,
     output reg read_en_o, 
     output reg underflow,
-    output reg [4:0] ptr,
-    output reg [7:0]data_out_f
+    output reg [4:0] ptr
 );
 
     reg [4:0] count = 0;
@@ -15,21 +14,22 @@ module fifo_output_control (
             count <= 5'b0;
             ptr <= 5'b0;
             underflow <= 1'b0;
-            data_out_f <=0;
         end
-        else begin
-            if (read_en ) begin
-                if  (data_out != 8'd0) begin
+        else 
+        begin
+            if (read_en ) 
+            begin
+                if  (data_out != 8'd0) 
+                begin
                     underflow <= 1'b0;
                     count <= count + 1;
                     ptr <= count;
                     read_en_o <= 1'b1;
-                    data_out_f <=data_out;
                 end
-                else begin
+                else 
+                begin
                     underflow <= 1'b1;
                     read_en_o <= 1'b0;
-                    data_out_f <=0;
                 end
             end
             else begin

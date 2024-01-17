@@ -16,9 +16,9 @@ begin
     begin
         if(write_en)
         begin
-            write_en_o <=1;
             if (count!=5'b1111)
             begin
+                write_en_o <=1;
                 overflow<=  0;
                 count <= count+1;
                 ptr<=count;
@@ -26,6 +26,7 @@ begin
             else
             begin
                 overflow <=1; 
+                write_en_o <=0;
             end
         end
         else 
