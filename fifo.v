@@ -23,7 +23,7 @@ begin
     begin
         ptr_rd<=4'b0;
     end 
-    if(en_write)
+    if(en_read)
         ptr_rd<= ptr_rd+1;
 end
 
