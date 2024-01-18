@@ -7,6 +7,7 @@ module fifo_tb;
   reg [7:0] data_in;
   reg en_read, reset, clk, en_write;
   integer i = 0;
+  wire underflow,overflow;
 
   // Outputs
   wire [7:0] data_out;
@@ -18,7 +19,9 @@ module fifo_tb;
     .reset(reset),
     .clk(clk),
     .en_write(en_write),
-    .data_out(data_out)
+    .data_out(data_out),
+    .underflow(underflow),
+    .overflow(overflow)
   );
 
   // Clock generation

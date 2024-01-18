@@ -1,6 +1,7 @@
 module fifo (
     input [7:0] data_in,
     input en_read,en_write,reset,clk,
+    output reg overflow,underflow,
     output reg [7:0] data_out
 );
 reg [7:0] register [15:0];
@@ -14,7 +15,10 @@ begin
         ptr_wr<=4'b0;
     end 
     if(en_write)
-        ptr_wr<= ptr_wr+1;
+        if(ptr_wr!=4'b1111)
+            ptr_wr<= ptr_wr+1;
+        else
+            overflow <=1;
 end
 
 always @ (posedge clk)  
@@ -24,7 +28,11 @@ begin
         ptr_rd<=4'b0;
     end 
     if(en_read)
-        ptr_rd<= ptr_rd+1;
+        if(ptr_rd!=4'b1111)
+            ptr_rd<= ptr_rd+1;
+        else
+            underflow <=1;
+        
 end
 
 always @(posedge clk) 
@@ -38,6 +46,8 @@ begin
         data_out <=8'b0;
         ptr_wr<=0;
         ptr_rd<=0;
+        overflow<=0;
+        underflow<=0;
     end 
     else
     begin
