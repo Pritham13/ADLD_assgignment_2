@@ -20,7 +20,7 @@ fifo_input_control fifo_input_control1 (
 fifo_output_control fifo_output_control2 (
     .read_en(read_en), .reset(reset), .clk(clk),
     .read_en_o(read_en_o), .underflow(underflow),
-    .ptr(ptr_uf),
+    .ptr(ptr_uf)
 );
 // main inititalizaton
 fifo fifo_inst (

@@ -11,6 +11,7 @@ begin
         count <= 5'b0;
         ptr <= 5'b0;
         overflow <= 1'b0;
+        write_en_o <=0;
     end    
     else 
     begin
