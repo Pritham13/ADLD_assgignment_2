@@ -37,11 +37,11 @@ begin
             if (register[15] != 8'b0)
             begin
                 data_out <= register[15];
-                for (i = 0; i < ptr_wr; i = i + 1)
+                for (i = 15; i > ptr_wr; i = i - 1)
                 begin
-                    register[i] <= register[i + 1];
+                    register[i] <= register[i - 1];
                 end
-                ptr_wr <= ptr_wr - 1;
+                ptr_wr <= ptr_wr + 1;
             end
             else
             begin
