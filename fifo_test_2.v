@@ -9,7 +9,7 @@ reg [7:0] register [0:15];
 reg [3:0] ptr_wr;
 integer i;
 
-always @(posedge clk) 
+always @(posedge clk ,posedge reset) 
 begin
     if (reset)
     begin
@@ -24,17 +24,31 @@ begin
     end 
     else
     begin
+        if (ptr_wr != 4'b0)
+            begin
+                overflow <= 1'b0;
+            end
+            else
+                overflow <= 1'b1;
+        if (ptr_wr==15)
+            begin
+                underflow<=1;
+            end
+        else
+            begin
+                underflow<=0;
+            end
         if (en_write)
         begin
             register[ptr_wr] <= data_in;
-            if (ptr_wr != 4'b0)
+            if (!overflow)
+            begin
                 ptr_wr <= ptr_wr - 1;
-            else
-                overflow <= 1;
+            end
         end
         if (en_read)
         begin
-            if (register[15] != 8'b0)
+            if (!underflow)
             begin
                 data_out <= register[15];
                 for (i = 15; i > ptr_wr; i = i - 1)
@@ -42,10 +56,6 @@ begin
                     register[i] <= register[i - 1];
                 end
                 ptr_wr <= ptr_wr + 1;
-            end
-            else
-            begin
-                underflow <= 1'b1;   
             end
         end
         else 
