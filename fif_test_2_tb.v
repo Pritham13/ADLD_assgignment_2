@@ -1,5 +1,5 @@
 `timescale 1ns / 1ps
-`include "fifo_test_2.v"
+`include "fifo_2.v"
 
 module fifo_2_tb;
 
@@ -48,14 +48,15 @@ module fifo_2_tb;
     en_write = 1;
 
     // Use a for loop to generate random values
-    for (i = 0; i < 16; i = i + 1) begin
+    for (i = 0; i < 15; i = i + 1) begin
       data_in = $random % 256; // 256 is 2^8
       $display("Random 8-bit Number[%0d]: %h", i, data_in);
       #10;
     end
 
-    en_read = 1;
     en_write = 0;
+    #10
+    en_read = 1;
     #160 $finish;
   end
 
