@@ -8,12 +8,14 @@ module fifo_2 (
 reg [7:0] register [0:15];
 reg [3:0] ptr_wr;
 integer i;
-
+localparam Size = 16;
+localparam Size1 = 15; 
+localparam count = 1;  
 always @(posedge clk ,posedge reset) 
 begin
     if (reset)
     begin
-        for (i = 0; i < 16; i = i + 1)
+        for (i = 0; i < Size; i = i + count)
         begin
             register[i] = 8'd0; 
         end 
@@ -51,9 +53,9 @@ begin
             if (!underflow)
             begin
                 data_out <= register[15];
-                for (i = 15; i > ptr_wr; i = i - 1)
+                for (i = Size1; i > 0; i = i - count)
                 begin
-                    register[i] <= register[i - 1];
+                    register[i] <= register[i - count];
                 end
                 ptr_wr <= ptr_wr + 1;
             end
